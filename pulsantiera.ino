@@ -1,5 +1,5 @@
 
-byte lastScritto = 0;
+byte last = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -9,22 +9,26 @@ void setup() {
 }
 
 void loop() {
-
-  if(lastScritto != 1 && digitalRead(25) == HIGH)
-  {
-    lastScritto = 1;
+  if(last != 1 && digitalRead(25) == HIGH){
+    last = 1;
     Serial.println("1");
   }  
-  if(lastScritto != 2 && digitalRead(26) == HIGH)
-  {
-    lastScritto = 2;
+  if(last != 2 && digitalRead(26) == HIGH){
+    last = 2;
     Serial.println("2");
   }  
-  if(lastScritto != 3 && digitalRead(27) == HIGH)
-  {
-    lastScritto = 3;
+  if(last != 3 && digitalRead(27) == HIGH){
+    last = 3;
     Serial.println("3");
-  }
+  } 
   
-  delay(10);
+  if(allLow()){
+    last = 0;
+  }
+}
+
+boolean allLow(){
+  return digitalRead(25) == LOW && 
+         digitalRead(26) == LOW && 
+         digitalRead(27) == LOW;
 }
