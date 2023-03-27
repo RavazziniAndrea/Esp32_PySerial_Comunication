@@ -1,4 +1,3 @@
-
 byte last = 0;
 
 void setup() {
